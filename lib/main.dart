@@ -1,14 +1,21 @@
-// main.dart
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tms/view/screens/HomeScreen/home_screen.dart';
 
+import 'controller/taskBox_controller/taskBoxController.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // Initialize TaskBoxController
+    Get.put(TaskBoxController());
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),

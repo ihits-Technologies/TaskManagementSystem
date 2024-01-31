@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class TextStyles{
   static const TextStyle PrimaryTitle = TextStyle(
+    fontFamily: "Rubik",
     color: Colors.black,
     fontSize: 28,
     fontWeight: FontWeight.bold

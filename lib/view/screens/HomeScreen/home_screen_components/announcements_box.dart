@@ -10,7 +10,8 @@ class AnnouncementsBox extends StatelessWidget {
   AnnouncementsBox({
     required this.headingStyle,
     required this.title,
-    this.boxWidth = double.infinity, // Default to maximum width, can be adjusted
+    this.boxWidth =
+        double.infinity, // Default to maximum width, can be adjusted
   });
 
   @override
@@ -26,9 +27,12 @@ class AnnouncementsBox extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Container(
-            width: double.infinity, // Ensure the inner container takes full width
-            padding: EdgeInsets.all(16),
+            width:
+                double.infinity, // Ensure the inner container takes full width
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
+              gradient: AppColors.appbarGradiaent
+              , // Set the background color to cyan
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -36,9 +40,9 @@ class AnnouncementsBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.announcement_sharp,
+                  Icons.announcement_rounded,
                   size: 68,
-                  color: AppColors.selectedColor,
+                  color: AppColors.announcementColor,
                 ),
                 SizedBox(height: 16),
               ],

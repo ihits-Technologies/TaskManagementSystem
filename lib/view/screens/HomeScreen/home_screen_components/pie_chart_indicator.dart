@@ -1,19 +1,21 @@
-// pie_chart_indicator.dart
-
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:get/get.dart';
 
-import 'package:tms/app_colors/app_colors.dart';
+import '../../../../app_colors/app_colors.dart';
+import '../../../../controller/taskBox_controller/taskBoxController.dart';
 
 class PieChartIndicator extends StatelessWidget {
   final double completedPercentage;
   final double pendingPercentage;
   final double overduePercentage;
+  final int totalTasks;
 
   PieChartIndicator({
     required this.completedPercentage,
     required this.pendingPercentage,
     required this.overduePercentage,
+    required this.totalTasks,
   });
 
   @override
@@ -28,7 +30,7 @@ class PieChartIndicator extends StatelessWidget {
               value: 1.0,
               valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[300]!),
               backgroundColor: Colors.transparent,
-              strokeWidth: 20, // Adjust the border width
+              strokeWidth: 20,
             ),
           ),
           Positioned.fill(
@@ -40,15 +42,30 @@ class PieChartIndicator extends StatelessWidget {
               ),
             ),
           ),
+          Center(
+            child: ShaderMask(
+              shaderCallback: (bounds) => AppColors.totalTasksGradiant.createShader(bounds),
+              child: Text(
+                ' $totalTasks',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+
         ],
       ),
     );
   }
 }
+
 class _PieChartPainter extends CustomPainter {
   final double completedPercentage;
   final double pendingPercentage;
   final double overduePercentage;
+  final TaskBoxController controller = Get.find<TaskBoxController>();
 
   _PieChartPainter({
     required this.completedPercentage,
@@ -56,49 +73,48 @@ class _PieChartPainter extends CustomPainter {
     required this.overduePercentage,
   });
 
+  static const double smallGap = 0.03;
+
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromCircle(center: size.center(Offset.zero), radius: size.width / 2);
+    final rect = Rect.fromCircle(
+      center: size.center(Offset.zero),
+      radius: size.width / 2,
+    );
     final paint = Paint()
-      ..strokeWidth = 20 // Adjust the border width
+      ..strokeWidth = 20
       ..style = PaintingStyle.stroke;
 
-    double gapSize = 0.02;
-
-// Draw completed section with a gap
-    paint.color = AppColors.completedColor;
-    canvas.drawArc(
-      rect,
-      gapSize, // Small gap at the beginning
-      2 * pi * (completedPercentage / 100) - 2 * gapSize, // Adjusted sweep angle to create a gap at the end
-      false,
-      paint,
-    );
-
-// Draw pending section with a gap
-    paint.color = AppColors.pendingColor;
-    canvas.drawArc(
-      rect,
-      2 * pi * ((completedPercentage + gapSize) / 100) + gapSize, // Starting point after the gap
-      2 * pi * (pendingPercentage / 100) - 2 * gapSize, // Adjusted sweep angle to create a gap at the end
-      false,
-      paint,
-    );
-
-// Draw overdue section with a gap
-    paint.color = AppColors.overdueColor;
-    canvas.drawArc(
-      rect,
-      2 * pi * ((completedPercentage + pendingPercentage + gapSize) / 100) + gapSize, // Starting point after the gap
-      2 * pi * (overduePercentage / 100) - 2 * gapSize, // Adjusted sweep angle to create a gap at the end
-      false,
-      paint,
-    );
-
-
+    _drawSection(canvas, rect, paint, controller.completedColor.value,
+        completedPercentage, 0);
+    _drawSection(canvas, rect, paint, controller.pendingColor.value,
+        pendingPercentage, 2 * pi * (completedPercentage / 100) + smallGap);
+    _drawSection(
+        canvas,
+        rect,
+        paint,
+        controller.overdueColor.value,
+        overduePercentage,
+        2 * pi * ((completedPercentage + pendingPercentage) / 100) + smallGap);
   }
+
+  void _drawSection(Canvas canvas, Rect rect, Paint paint, Color color,
+      double percentage, double startAngle) {
+    paint.color = color;
+    canvas.drawArc(
+      rect,
+      startAngle + smallGap,
+      2 * pi * (percentage / 100) - 2 * smallGap,
+      false,
+      paint,
+    );
+  }
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
 }
+
+
+

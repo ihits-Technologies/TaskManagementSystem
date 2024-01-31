@@ -1,34 +1,33 @@
-// home_screen.dart
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tms/app_colors/app_colors.dart';
 import 'package:tms/text_styles/text_styles.dart';
 import 'package:tms/view/screens/HomeScreen/assigned_Task_Screen/AssignedTasks.dart';
 import 'home_screen_components/task_box.dart';
 import 'home_screen_components/announcements_box.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  final RxInt _selectedIndex = 0.obs;
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: AppColors.appbarGradiaent
+          ),
+        ),
+        // backgroundColor: AppColors.AppBarColor,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
+
             size: 40,
-            color: AppColors.selectedColor,
-          ), // Use the Menu icon for the hamburger icon
-          color: Colors.black,
+            color: AppColors.announcementColor,
+          ),
           onPressed: () {
             // Handle the onPressed event (e.g., open the drawer)
           },
@@ -47,66 +46,50 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssignedScren()));
-              },
-              child: TaskBox(
-                title: "Assigned",
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => AssignedScren(),
+                    // arguments: anyArgumentsYouWantToPass, // Uncomment if you want to pass arguments
+                  );
+                },
+                child: TaskBox(
+                  title: "Assigned",
+                  pendingPercentage: 30,
+                  overduePercentage: 20,
+                  completedPercentage: 50,
+                  totalTasks: 25,
 
-                pendingPercentage: 30,
-                overduePercentage: 20,
-                completedPercentage: 50,
-                headingStyle: TextStyles.secondaryTitle, // Updated this line
-              ),
-            ),
-            const SizedBox(height: 16),
 
-            GestureDetector(
-              onTap: () {},
-              child: TaskBox(
-                title: "Received",
-                completedPercentage: 20,
-                pendingPercentage: 40,
-                overduePercentage: 40,
-                headingStyle: TextStyles.secondaryTitle, // Updated this line
+                  headingStyle: TextStyles.secondaryTitle,
+                ),
               ),
-            ),
-            // const SizedBox(height: 16),
-            // GestureDetector(
-            //   child: Expanded(
-            //     child: AnnouncementsBox(
-            //       headingStyle: TextStyles.secondaryTitle, // Updated this line
-            //     ),
-            //   ),
-            // ),
-            const SizedBox(
-              height: 16,
-            ),
-            GestureDetector(
-              onTap: (){
-
-              },
-              child: AnnouncementsBox(
-                headingStyle: TextStyles.secondaryTitle,
-                title: "Announcements",
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () {},
+                child: TaskBox(
+                  title: "Received",
+                  completedPercentage: 20,
+                  pendingPercentage: 40,
+                  overduePercentage: 40,
+                  totalTasks: 25,
+                  headingStyle: TextStyles.secondaryTitle,
+                ),
               ),
-            )
-            // GestureDetector(
-            //     onTap: () {},
-            //     child: Expanded(
-            //       child: AnnouncementsBox(
-            //         headingStyle: TextStyles.secondaryTitle,
-            //         title: "Announcements",
-            //       ),
-            //     ))
-          ],
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () {},
+                child: AnnouncementsBox(
+                  headingStyle: TextStyles.secondaryTitle,
+                  title: "Announcements",
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -115,34 +98,50 @@ class _HomeScreenState extends State<HomeScreen> {
             top: BorderSide(color: Colors.grey, width: 1.0),
           ),
         ),
-        child: BottomNavigationBar(
-          selectedItemColor:
-              AppColors.selectedColor, // Change the selected item color
-          unselectedItemColor: Colors.black,
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.task),
-              label: 'Task',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: 'Chat',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.attach_file),
-              label: 'Attachments',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.send),
-              label: 'Actions',
-            ),
-          ],
+        child: Obx(
+          () => BottomNavigationBar(
+            selectedItemColor: AppColors.selectedColor,
+            unselectedItemColor: Colors.grey,
+            currentIndex: _selectedIndex.value,
+            onTap: (index) {
+              _selectedIndex.value = index;
+              // You can perform additional actions when tapping on the bottom navigation bar items
+              switch (index) {
+                case 0:
+                  // Handle 'Task' tab
+                  break;
+                case 1:
+
+                  break;
+                case 2:
+                  // Handle 'Attachments' tab
+                  break;
+                case 3:
+                  // Handle 'Actions' tab
+                  break;
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.task,),
+                label: 'Task',
+
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.pending_actions),
+                label: 'actions',
+
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat),
+                label: 'chat',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.attachment),
+                label: 'attachments',
+              ),
+            ],
+          ),
         ),
       ),
     );
