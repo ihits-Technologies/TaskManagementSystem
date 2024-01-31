@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tms/app_colors/app_colors.dart';
 import 'package:tms/text_styles/text_styles.dart';
 import 'package:tms/view/screens/HomeScreen/assigned_Task_Screen/AssignedTasks.dart';
+import 'package:tms/view/screens/actions_screen.dart';
 import 'home_screen_components/task_box.dart';
 import 'home_screen_components/announcements_box.dart';
 
@@ -14,6 +15,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      backgroundColor: Colors.white70,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -23,7 +26,7 @@ class HomeScreen extends StatelessWidget {
         // backgroundColor: AppColors.AppBarColor,
         leading: IconButton(
           icon: const Icon(
-            Icons.menu,
+            Icons.menu_sharp,
 
             size: 40,
             color: AppColors.announcementColor,
@@ -32,8 +35,8 @@ class HomeScreen extends StatelessWidget {
             // Handle the onPressed event (e.g., open the drawer)
           },
         ),
-        centerTitle: true,
-        title: const Text("Task", style: TextStyles.PrimaryTitle),
+        // centerTitle: true,
+        title: const Text("Tasks", style: TextStyles.PrimaryTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle),
@@ -53,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Get.to(
-                    () => AssignedScren(),
+                    () => const AssignedScren(),
                     // arguments: anyArgumentsYouWantToPass, // Uncomment if you want to pass arguments
                   );
                 },
@@ -111,6 +114,7 @@ class HomeScreen extends StatelessWidget {
                   // Handle 'Task' tab
                   break;
                 case 1:
+                  Get.to(() => const ActionsScren());
 
                   break;
                 case 2:
@@ -124,7 +128,7 @@ class HomeScreen extends StatelessWidget {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.task,),
-                label: 'Task',
+                label: 'Tasks',
 
               ),
               BottomNavigationBarItem(

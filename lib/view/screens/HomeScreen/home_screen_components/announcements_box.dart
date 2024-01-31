@@ -7,7 +7,7 @@ class AnnouncementsBox extends StatelessWidget {
   final String title;
   final double boxWidth; // Add a property for width
 
-  AnnouncementsBox({
+  const AnnouncementsBox({super.key,
     required this.headingStyle,
     required this.title,
     this.boxWidth =
@@ -31,10 +31,19 @@ class AnnouncementsBox extends StatelessWidget {
                 double.infinity, // Ensure the inner container takes full width
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
+              // color: Colors.white
               gradient: AppColors.appbarGradiaent
               , // Set the background color to cyan
-              border: Border.all(color: Colors.grey),
+              // border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: Offset(0,3),
+                )
+              ]
             ),
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,

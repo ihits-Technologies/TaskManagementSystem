@@ -13,7 +13,7 @@ class TaskBox extends StatelessWidget {
   final TextStyle headingStyle;
   final int totalTasks;
 
-  TaskBox({
+  const TaskBox({super.key,
     required this.title,
     required this.completedPercentage,
     required this.pendingPercentage,
@@ -39,10 +39,19 @@ class TaskBox extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
+                color: Colors.white24,
+                border: Border.all(color: Colors.white24),
                 borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  )
+                ]
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -54,7 +63,7 @@ class TaskBox extends StatelessWidget {
                     totalTasks: totalTasks,
                     // Pass totalTasks
                   ),
-                  SizedBox(width: 1),
+                  const SizedBox(width: 1),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +71,7 @@ class TaskBox extends StatelessWidget {
                       Row(
                         children: [
                           DotIndicator(color: controller.completedColor.value),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text("Completed   ${completedPercentage.toInt()}%"),
                         ],
                       ),
@@ -76,7 +85,7 @@ class TaskBox extends StatelessWidget {
                           Text("Pending        ${pendingPercentage.toInt()}%"),
                         ],
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         children: [
                           DotIndicator(color: controller.overdueColor.value),
