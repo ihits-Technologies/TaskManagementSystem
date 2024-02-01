@@ -3,31 +3,34 @@ import 'package:get/get.dart';
 import 'package:tms/app_colors/app_colors.dart';
 import 'package:tms/text_styles/text_styles.dart';
 import 'package:tms/view/screens/HomeScreen/assigned_Task_Screen/AssignedTasks.dart';
-import 'package:tms/view/screens/actions_screen.dart';
+import 'package:tms/view/screens/NavigationScreens/actions_screen.dart';
 import 'home_screen_components/task_box.dart';
 import 'home_screen_components/announcements_box.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final RxInt _selectedIndex = 0.obs;
 
-  HomeScreen({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.white70,
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: AppColors.appbarGradiaent
-          ),
+          decoration: BoxDecoration(gradient: AppColors.appbarGradiaent),
         ),
         // backgroundColor: AppColors.AppBarColor,
         leading: IconButton(
           icon: const Icon(
             Icons.menu_sharp,
-
             size: 40,
             color: AppColors.announcementColor,
           ),
@@ -66,8 +69,6 @@ class HomeScreen extends StatelessWidget {
                   overduePercentage: 20,
                   completedPercentage: 50,
                   totalTasks: 25,
-
-
                   headingStyle: TextStyles.secondaryTitle,
                 ),
               ),
@@ -95,46 +96,84 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      //@#$%^&//
+      //// BOTTOM NAVIGATION  /////
+
+
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey, width: 1.0),
+        height: 70,
+        decoration:  BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(35),
+              topRight: Radius.circular(35),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
-        ),
+
+         child: ClipRRect(
+           borderRadius: BorderRadius.only(
+             topLeft: Radius.circular(22 ),
+             topRight: Radius.circular(22),
+           ),
+
+
+
+         // ...................................// border: Border(
+          //   top: BorderSide(color: Colors.grey, width: 1.0),
+          // ),.............................................
+
+
+
         child: Obx(
           () => BottomNavigationBar(
+
             selectedItemColor: AppColors.selectedColor,
             unselectedItemColor: Colors.grey,
             currentIndex: _selectedIndex.value,
+            iconSize: 25,
             onTap: (index) {
-              _selectedIndex.value = index;
-              // You can perform additional actions when tapping on the bottom navigation bar items
-              switch (index) {
-                case 0:
-                  // Handle 'Task' tab
-                  break;
-                case 1:
-                  Get.to(() => const ActionsScren());
+              setState(() {
+                _selectedIndex.value = index;
+              });
 
-                  break;
-                case 2:
-                  // Handle 'Attachments' tab
-                  break;
-                case 3:
-                  // Handle 'Actions' tab
-                  break;
+              if (index != _selectedIndex) {
+                switch (index) {
+                  case 0:
+                    // Handle 'Task' tab
+                    break;
+                  case 1:
+
+                    break;
+                  case 2:
+                    // Handle 'Attachments' tab
+                    break;
+                  case 3:
+                    // Handle 'Actions' tab
+                    break;
+                }
               }
             },
+            // You can perform additional actions when tapping on the bottom navigation bar items
+            //   switch (index) {
+
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.task,),
+                icon: Icon(
+                  Icons.task,
+                ),
                 label: 'Tasks',
-
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.pending_actions),
                 label: 'actions',
-
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.chat),
@@ -148,6 +187,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      )
     );
   }
 }
