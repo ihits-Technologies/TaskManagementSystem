@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     // Initialize TaskBoxController
     Get.put(TaskBoxController());
 
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
