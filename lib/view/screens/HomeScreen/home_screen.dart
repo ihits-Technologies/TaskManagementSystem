@@ -5,8 +5,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../app_colors/app_colors.dart';
 import '../NavigationScreens/ActionsScreen/actions_screen.dart';
 import '../NavigationScreens/attachment_screen.dart';
-import '../NavigationScreens/chat_screen.dart'
-    '';
+import '../NavigationScreens/chat_screen.dart';
 import '../NavigationScreens/task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,21 +16,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController();
   final RxInt _selectedIndex = 0.obs;
 
-  final List<Widget> pages = [
-    TaskScreen(),
-    const ActionsScreen(),
-    const ChatScreen(),
-    const AttachmentScreen(),
-  ];
-
-  final Map<int, String> _appBarTitles = {
-    0: 'Tasks',
-    1: 'Actions',
-    2: 'Chat',
-    3: 'Attachments',
-  };
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +35,35 @@ class _HomeScreenState extends State<HomeScreen> {
           flexibleSpace: Container(
             decoration: BoxDecoration(gradient: AppColors.appbarGradiaent),
           ),
-          leading: _selectedIndex.value == 0
+          leading: _selectedIndex.value > 0
               ? IconButton(
-                  icon: const Icon(
-                    Icons.menu_sharp,
-                    size: 40,
-                    color: AppColors.announcementColor,
-                  ),
-                  onPressed: () {},
-                )
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              _pageController.jumpToPage(0);
+            },
+          )
               : IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    // Navigate back to the Task screen
-                    _selectedIndex.value = 0;
-                  },
-                ),
-
-          title: Obx(() => Text(_appBarTitles[_selectedIndex.value] ?? '')),
+            icon: const Icon(
+              Icons.menu_sharp,
+              size: 40,
+              color: AppColors.announcementColor,
+            ),
+            onPressed: () {},
+          ),
+          title: Obx(() {
+            switch (_selectedIndex.value) {
+              case 0:
+                return const Text('Tasks');
+              case 1:
+                return const Text('Actions');
+              case 2:
+                return const Text('Chat');
+              case 3:
+                return const Text('Attachments');
+              default:
+                return const Text('');
+            }
+          }),
           actions: [
             IconButton(
               icon: const Icon(Icons.account_circle),
@@ -70,39 +73,49 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: pages[_selectedIndex.value],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          _selectedIndex.value = index;
+        },
+        children:  [
+          TaskScreen(),
+          ActionsScreen(),
+          ChatScreen(),
+          AttachmentScreen(),
+        ],
+      ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
-            selectedItemColor: AppColors.selectedColor,
-            unselectedItemColor: Colors.grey,
-            currentIndex: _selectedIndex.value,
-            iconSize: 25,
-            onTap: (index) {
-              _selectedIndex.value = index;
-              // Adapt back navigation based on your routing approach (e.g., Get.back() or Navigator.pop())
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.task,
-                ),
-                label: 'Tasks',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.pending_actions,
-                ),
-                label: 'Actions',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
-                label: 'Chat',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.attachment),
-                label: 'Attachments',
-              ),
-            ],
-          )),
+        selectedItemColor: AppColors.selectedColor,
+        unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex.value,
+        iconSize: 25,
+        onTap: (index) {
+          _pageController.jumpToPage(index);
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.task,
+            ),
+            label: 'Tasks',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.pending_actions,
+            ),
+            label: 'Actions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.attachment),
+            label: 'Attachments',
+          ),
+        ],
+      )),
     );
   }
 }
