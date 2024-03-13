@@ -47,6 +47,8 @@ class AssignedPendingListItem extends GetView {
                 tileColor: Colors.white,
                 title: Text(assigntaskpending[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                 subtitle: Row(
+
+
                   children: [
                     Text(assigntaskpending[index].assign_name),
                     SizedBox(width: 10,),
