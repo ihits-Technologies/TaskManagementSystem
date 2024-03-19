@@ -1,6 +1,6 @@
 
 
-import '../../../core/strings/strings.dart';
+import 'package:tms/core/strings/strings.dart';
 
 class OutboxUser {
   final String oname;

@@ -1,23 +1,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/core/colors/colors.dart';
 
-import '../../../../core/colors/colors.dart';
 import '../models/task_assign_model.dart';
 
-
-class AssignedListItemController extends GetxController {
-
-}
+class AssignedListItemController extends GetxController {}
 
 class AssignedListItem extends GetView {
-  final AssignedListItemController controller = Get.put(AssignedListItemController());
+  final AssignedListItemController controller =
+      Get.put(AssignedListItemController());
 
   final Color containerColor;
   final String itemText;
   final int index;
 
-  AssignedListItem( {
+  AssignedListItem({
     Key? key,
     required this.containerColor,
     this.itemText = "",
@@ -45,18 +43,30 @@ class AssignedListItem extends GetView {
               elevation: 1,
               child: ListTile(
                 tileColor: Colors.white,
-                title: Text(assigntasks[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                title: Text(
+                  assignedTaskCompleted[index].taskName ?? ' ',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
                 subtitle: Row(
                   children: [
-                    Text(assigntasks[index].assign_name),
-                    SizedBox(width: 10,),
-                    Text("|"),
-                    SizedBox(width: 10,),
-                    Text(assigntasks[index].assigndate)
+                    Text(assignedTaskCompleted[index].assignName ?? ''),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text("|"),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(assignedTaskCompleted[index].assignDate ?? ' ')
                   ],
                 ),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-                trailing: Text(assigntasks[index].status,style: TextStyle(color: greenColor),),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                trailing: Text(
+                  assignedTaskCompleted[index].status,
+                  style: const TextStyle(color: greenColor),
+                ),
               ),
             ),
           ),

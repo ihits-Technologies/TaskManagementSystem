@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/colors/colors.dart';
+import 'package:tms/core/colors/colors.dart';
+
+import '../completed/models/task_assign_model.dart';
 import 'models/pending_task_assign_model.dart';
 import 'widgets/assigned_pending_list_item.dart';
 

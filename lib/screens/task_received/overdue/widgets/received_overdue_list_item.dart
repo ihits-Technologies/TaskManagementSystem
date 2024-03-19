@@ -46,18 +46,18 @@ class ReceivedOverdueListItem extends GetView {
               elevation: 1,
               child: ListTile(
                 tileColor: Colors.white,
-                title: Text(receivetaskoverdue[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                title: Text(receivetaskoverdue[index].taskName,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                 subtitle: Row(
                   children: [
-                    Text(receivetaskoverdue[index].assign_name),
-                    SizedBox(width: 10,),
-                    Text("|"),
-                    SizedBox(width: 10,),
-                    Text(receivetaskoverdue[index].assigndate)
+                    Text(receivetaskoverdue[index].assignName ?? ' '),
+                    const SizedBox(width: 10,),
+                    const Text("|"),
+                    const SizedBox(width: 10,),
+                    Text(receivetaskoverdue[index].assignDate ?? ' ')
                   ],
                 ),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-                trailing: Text(receivetaskoverdue[index].status,style: TextStyle(color: redColor),),
+                trailing: Text(receivetaskoverdue[index].status,style: const TextStyle(color: redColor),),
               ),
             ),
           ),

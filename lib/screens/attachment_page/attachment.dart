@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/screens/attachment_page/inbox.dart';
 import '../../core/colors/colors.dart';
 import '../../core/strings/strings.dart';
-import 'inbox.dart';
 import 'outbox.dart';
 
 class AttachController extends GetxController {

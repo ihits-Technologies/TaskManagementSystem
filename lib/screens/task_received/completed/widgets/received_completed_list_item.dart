@@ -1,24 +1,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/core/colors/colors.dart';
 
-import '../../../../core/colors/colors.dart';
 import '../models/task_receive_complete_model.dart';
 
-
-
-class ReceivedCompleteListItemController extends GetxController {
-
-}
+class ReceivedCompleteListItemController extends GetxController {}
 
 class ReceivedCompleteListItem extends GetView {
-  final ReceivedCompleteListItemController controller = Get.put(ReceivedCompleteListItemController());
+  final ReceivedCompleteListItemController controller =
+      Get.put(ReceivedCompleteListItemController());
 
   final Color containerColor;
   final String itemText;
   final int index;
 
-  ReceivedCompleteListItem( {
+  ReceivedCompleteListItem({
     Key? key,
     required this.containerColor,
     this.itemText = "",
@@ -46,18 +43,30 @@ class ReceivedCompleteListItem extends GetView {
               elevation: 1,
               child: ListTile(
                 tileColor: Colors.white,
-                title: Text(receivetaskcomplete[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                title: Text(
+                  receivetaskcomplete[index].taskName ?? '',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
                 subtitle: Row(
                   children: [
-                    Text(receivetaskcomplete[index].assign_name),
-                    SizedBox(width: 10,),
-                    Text("|"),
-                    SizedBox(width: 10,),
-                    Text(receivetaskcomplete[index].assigndate)
+                    Text(receivetaskcomplete[index].assignName ?? ''),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text("|"),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(receivetaskcomplete[index].assignDate ?? '')
                   ],
                 ),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-                trailing: Text(receivetaskcomplete[index].status,style: TextStyle(color: greenColor),),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                trailing: Text(
+                  receivetaskcomplete[index].status,
+                  style: const TextStyle(color: greenColor),
+                ),
               ),
             ),
           ),

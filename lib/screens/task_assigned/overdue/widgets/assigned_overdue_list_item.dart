@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms/core/colors/colors.dart';
 
-import '../../pending/models/pending_task_assign_model.dart';
 import '../models/overdue_task_assign_model.dart';
 
 
@@ -58,7 +57,7 @@ class AssignedOverdueListItem extends GetView {
                   ],
                 ),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-                trailing: Text(assigntaskpending[index].status,style: TextStyle(color: redColor),),
+                trailing: Text(assigntaskoverdue[index].status,style: TextStyle(color: redColor),),
               ),
             ),
           ),

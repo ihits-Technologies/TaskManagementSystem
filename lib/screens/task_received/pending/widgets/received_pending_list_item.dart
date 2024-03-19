@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tms/core/colors/colors.dart';
-import 'package:tms/screens/task_received/pending/models/task_receive_pending_model.dart';
+
+import '../../../../core/colors/colors.dart';
+import '../models/task_receive_pending_model.dart';
 
 
 
@@ -45,18 +46,18 @@ class ReceivedPendingListItem extends GetView {
               elevation: 1,
               child: ListTile(
                 tileColor: Colors.white,
-                title: Text(receivetaskpending[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                title: Text(receivetaskpending[index].taskName ?? '',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                 subtitle: Row(
                   children: [
-                    Text(receivetaskpending[index].assign_name),
+                    Text(receivetaskpending[index].assignName ?? ''),
                     const SizedBox(width: 10,),
                     const Text("|"),
                     const SizedBox(width: 10,),
-                    Text(receivetaskpending[index].assigndate)
+                    Text(receivetaskpending[index].assignDate)
                   ],
                 ),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-                trailing: Text(receivetaskpending[index].status,style: TextStyle(color: yellowColor),),
+                trailing: Text(receivetaskpending[index].status,style: const TextStyle(color: yellowColor),),
               ),
             ),
           ),

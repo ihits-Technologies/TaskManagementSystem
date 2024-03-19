@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tms/screens/task_assigned/pending/pending_assigned.dart';
 import '../../core/colors/colors.dart';
 import '../../core/strings/strings.dart';
 import 'completed/completed_assigned.dart';
 import 'overdue/overdue_assigned.dart';
+import 'pending/pending_assigned.dart';
 
 class AssignedController extends GetxController {
   RxInt currentIndex = 0.obs;
@@ -62,10 +62,10 @@ class _AssignedState extends State<Assigned>
                 ),
               ),
             ],
-            bottom: PreferredSize(
+            bottom: const PreferredSize(
               preferredSize: Size.fromHeight(30),
               child: TabBar(
-                tabs: const [
+                tabs: [
                   Tab(
                     text: AppStrings.completed,
                   ),
@@ -88,7 +88,7 @@ class _AssignedState extends State<Assigned>
             ),
           ),
           backgroundColor: appBarColor,
-          body: TabBarView(children: [
+          body: const TabBarView(children: [
             CompletedAssigned(),
             PendingAssigned(),
             OverdueAssigned()

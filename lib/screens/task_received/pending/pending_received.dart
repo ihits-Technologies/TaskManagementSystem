@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tms/core/colors/colors.dart';
-import 'package:tms/screens/task_assigned/completed/models/task_assign_model.dart';
 
+import '../../../core/colors/colors.dart';
+import 'models/task_receive_pending_model.dart';
 import 'widgets/received_pending_list_item.dart';
 
 class PendingReceived extends StatelessWidget {
@@ -12,42 +12,23 @@ class PendingReceived extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 1),
-              width: Get.width,
-              height: Get.height,
-              decoration: const BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(28),
-                  topRight: Radius.circular(28),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 1,
-                  ),
-                ],
-              ),
-              child: LayoutBuilder(
-                builder: (context, snapshot) {
-                  return ListView.builder(
-                    itemCount: assigntasks.length,
-                    itemBuilder: (context, index) {
-                      String itemText = '';
+      child: Container(
+        decoration: const BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(28),
+            topRight: Radius.circular(28),
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: receivetaskpending.length,
+          itemBuilder: (context, index) {
+            String itemText = '';
 
-                      return ReceivedPendingListItem(
-                          containerColor: yellowColor,
-                          index: index);
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
+            return ReceivedPendingListItem(
+                containerColor: yellowColor,
+                index: index);
+          },
         ),
       ),
     );

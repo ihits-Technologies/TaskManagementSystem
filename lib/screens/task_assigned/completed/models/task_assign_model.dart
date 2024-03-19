@@ -1,5 +1,6 @@
 
-import '../../../../core/strings/strings.dart';
+
+import 'package:tms/core/strings/strings.dart';
 
 class AssignedCompleted {
   final String task_name;
@@ -14,7 +15,7 @@ class AssignedCompleted {
       this.assigndate);
 }
 
-List assigntasks = [
+List assignedTaskCompleted = [
   AssignedCompleted("Proposed to HOCL", "Issac John", "Completed", AppStrings.date),
   AssignedCompleted("Prototyping", "Abin Berly", "Completed", AppStrings.date),
   AssignedCompleted("3D rendering", "Amal Pradeep", "Completed", AppStrings.date),

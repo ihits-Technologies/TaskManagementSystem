@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tms/core/colors/colors.dart';
-import 'package:tms/screens/task_assigned/pending/models/pending_task_assign_model.dart';
+
+import '../../../../core/colors/colors.dart';
+import '../models/pending_task_assign_model.dart';
 
 
 
@@ -47,8 +48,6 @@ class AssignedPendingListItem extends GetView {
                 tileColor: Colors.white,
                 title: Text(assigntaskpending[index].task_name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                 subtitle: Row(
-
-
                   children: [
                     Text(assigntaskpending[index].assign_name),
                     SizedBox(width: 10,),
