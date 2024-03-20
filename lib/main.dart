@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms/view/screens/HomeScreen/home_screen.dart';
 
-import 'controller/taskBox_controller/taskBoxController.dart';
+import 'controllers/taskBox_controller/taskBoxController.dart';
+
 
 void main() {
   runApp(const MyApp());

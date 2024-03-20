@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:tms/view/screens/HomeScreen/home_screen_components/pie_chart_indicator.dart';
 import 'package:tms/view/screens/HomeScreen/home_screen_components/dot_indicator.dart';
 
-import '../../../../controller/taskBox_controller/taskBoxController.dart';
+import '../../../../controllers/taskBox_controller/taskBoxController.dart';
+
 
 class TaskBox extends StatelessWidget {
   final String title;

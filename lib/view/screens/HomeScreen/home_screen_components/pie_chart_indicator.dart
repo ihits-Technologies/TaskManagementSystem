@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:get/get.dart';
 
-import '../../../../app_colors/app_colors.dart';
-import '../../../../controller/taskBox_controller/taskBoxController.dart';
+import '../../../../constants/app_colors/app_colors.dart';
+import '../../../../controllers/taskBox_controller/taskBoxController.dart';
 
 class PieChartIndicator extends StatelessWidget {
   final double completedPercentage;

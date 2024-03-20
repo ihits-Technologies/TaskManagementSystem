@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tms/app_colors/app_colors.dart';
-import '../../../../model/Action/ActionItem.dart';
+
+import '../../../../constants/app_colors/app_colors.dart';
+import '../../../../models/Action/ActionItem.dart';
 
 class ActionDetailScreen extends StatefulWidget {
   final ActionItem action;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tms/app_colors/app_colors.dart';
-import '../../../../model/contacts/Contact.dart';
+import '../../../../constants/app_colors/app_colors.dart';
+import '../../../../models/contacts/Contact.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({Key? key}) : super(key: key);

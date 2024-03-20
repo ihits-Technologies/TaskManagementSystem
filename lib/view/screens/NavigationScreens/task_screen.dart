@@ -1,10 +1,9 @@
 // TaskScreen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tms/app_colors/app_colors.dart';
-import 'package:tms/text_styles/text_styles.dart';
 import 'package:tms/view/screens/HomeScreen/assigned_Task_Screen/AssignedTasks.dart';
 
+import '../../../constants/text_styles/text_styles.dart';
 import '../HomeScreen/home_screen_components/announcements_box.dart';
 import '../HomeScreen/home_screen_components/task_box.dart';
 

@@ -1,6 +1,7 @@
 // announcements_box.dart
 import 'package:flutter/material.dart';
-import 'package:tms/app_colors/app_colors.dart';
+
+import '../../../../constants/app_colors/app_colors.dart';
 
 class AnnouncementsBox extends StatelessWidget {
   final TextStyle headingStyle;
