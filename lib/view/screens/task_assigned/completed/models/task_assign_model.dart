@@ -5,16 +5,13 @@
 import '../../../../../constants/strings/strings.dart';
 
 class AssignedCompleted {
-  final String task_name;
-  final String? assign_name;
+  final String taskName;
+  final String? assignName;
   final String status;
-  final String assigndate;
+  final String assignDate;
 
-  AssignedCompleted(
-      this.task_name,
-      this.assign_name,
-      this.status,
-      this.assigndate);
+  AssignedCompleted(this.taskName, this.assignName, this.status, this.assignDate
+      );
 }
 
 List assignedTaskCompleted = [

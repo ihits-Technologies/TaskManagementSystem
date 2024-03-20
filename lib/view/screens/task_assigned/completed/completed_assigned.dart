@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../../constants/colors/colors.dart';
 import 'models/task_assign_model.dart';
 import 'widgets/assigned_list_item.dart';
