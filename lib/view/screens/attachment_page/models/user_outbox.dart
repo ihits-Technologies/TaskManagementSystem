@@ -15,11 +15,11 @@ class OutboxUser {
 }
 
 List outboxusers = [
-  OutboxUser("Riyas", "assets/Ellipse 186.png", "resume.pdf", AppStrings.date),
-  OutboxUser("Berly", "assets/Ellipse 194.png", "Video", AppStrings.date),
-  OutboxUser("Catherine", "assets/Ellipse 11.png", "biodata.pdf", AppStrings.date),
-  OutboxUser("Daine", "assets/Ellipse 188.png", "landscape",AppStrings.date),
-  OutboxUser("Amal", "assets/Ellipse 190.png", "resume.pdf",AppStrings.date),
-  OutboxUser("Rafshi", "assets/Ellipse 194.png", "resume.pdf",AppStrings.date),
-  OutboxUser("Ben Sharooq", "assets/Ellipse 182.png", "biodata.pdf",AppStrings.date )
+  OutboxUser("Riyas", "lib/Assets/Ellipse 194.png", "resume.pdf", AppStrings.date),
+  OutboxUser("Berly", "lib/Assets/Ellipse 190.png", "Video", AppStrings.date),
+  OutboxUser("Catherine", "lib/Assets/Ellipse 188.png", "biodata.pdf", AppStrings.date),
+  OutboxUser("Daine", "lib/Assets/Ellipse 186.png", "landscape",AppStrings.date),
+  OutboxUser("Amal", "lib/Assets/Ellipse 182.png", "resume.pdf",AppStrings.date),
+  OutboxUser("Rafshi", "lib/Assets/Ellipse 11.png", "resume.pdf",AppStrings.date),
+  OutboxUser("Ben Sharooq", "lib/Assets/Ellipse 190.png", "biodata.pdf",AppStrings.date )
 ];

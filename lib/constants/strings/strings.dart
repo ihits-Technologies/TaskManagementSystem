@@ -22,7 +22,7 @@ class AppStrings{
 
   static const String highPriority = 'High';
   static const String proposedToHOCL = 'Proposed to HOCL';
-  static const String anupamaDetails = 'Issac John';
+  static const String catherine = 'Catherine';
   static const String overdue = 'Overdue';
   static const String completed = 'Completed';
   static const String attachment = 'Attachments';

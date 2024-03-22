@@ -19,12 +19,7 @@ class ReceivedTaskStep extends StatelessWidget {
         backgroundColor: appBarColor,
         title: Row(
           children: [
-            // IconButton(
-            //   icon: Icon(Icons.arrow_back_ios),
-            //   onPressed: () {
-            //     // Handle back button press
-            //   },
-            // ),
+
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 0.02),
               child: Text(
@@ -45,7 +40,7 @@ class ReceivedTaskStep extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: screenWidth * 0.04),
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/profilepic.png'),
+              backgroundImage: AssetImage('lib/Assets/profilepic.png'),
               radius: screenWidth * 0.05,
             ),
           ),
@@ -55,8 +50,8 @@ class ReceivedTaskStep extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(25.0),
+            const Padding(
+              padding: EdgeInsets.all(35.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -91,7 +86,7 @@ class ReceivedTaskStep extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20.0),
               width: screenWidth,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
