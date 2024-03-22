@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../constants/colors/colors.dart';
 import '../../../constants/strings/strings.dart';
 import 'inbox.dart';
@@ -19,9 +19,11 @@ class AttachPage extends StatefulWidget {
   State<AttachPage> createState() => _AttachPageState();
 }
 
-class _AttachPageState extends State<AttachPage> with SingleTickerProviderStateMixin {
+class _AttachPageState extends State<AttachPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final AttachController controller = Get.put(AttachController());
+  bool ShowAppBar = true;
 
   @override
   void initState() {
@@ -41,72 +43,45 @@ class _AttachPageState extends State<AttachPage> with SingleTickerProviderStateM
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: appBarColor,
-          title: Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: Get.width * 0.01, top: Get.width * 0.02),
-                child: Text(
-                  AppStrings.attachment,
-                  style: TextStyle(
-                    color: blackColor,
-                    fontSize: Get.width * 0.05,
-                    fontFamily: 'Rubik',
-                    fontWeight: FontWeight.w500,
+        body: Column(
+          children: [
+            Container(
+              color: appBarColor,
+              child: PreferredSize(
+                preferredSize: Size.fromHeight(20),
+                child: TabBar(
+                  tabs: const [
+                    Tab(
+                      text: "Inbox",
+                    ),
+                    Tab(
+                      text: "Outbox",
+                    ),
+                  ],
+                  labelStyle: const TextStyle(fontSize: 14, color: backgroundColor),
+                  unselectedLabelStyle:
+                  const TextStyle(fontSize: 12, color: Colors.white60),
+                  indicator: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 2.0),
+                    ),
                   ),
+                  controller: _tabController,
                 ),
               ),
-            ],
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
             ),
-            const SizedBox(width: 15),
-            Padding(
-              padding: EdgeInsets.only(right: Get.width * 0.04),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/profilepic.png'),
-                radius: Get.width * 0.04,
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _tabController,
+                children: [InboxPage(), OutboxPage()],
               ),
             ),
           ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(30),
-            child: TabBar(
-              tabs: const [
-                Tab(
-                  text: "Inbox",
-                ),
-                Tab(
-                  text: "Outbox",
-                ),
-              ],
-              labelStyle: TextStyle(fontSize: 14, color: backgroundColor),
-              unselectedLabelStyle: TextStyle(fontSize: 12, color: Colors.white60),
-              indicator: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colors.grey, width: 2.0),
-                ),
-              ),
-              controller: _tabController,
-            ),
-          ),
         ),
-        body: TabBarView(
-            children: [InboxPage(), OutboxPage()],
-            physics: NeverScrollableScrollPhysics(),
-            controller: _tabController,
-          ),
-        ),
-
+      ),
     );
+
   }
 
   @override

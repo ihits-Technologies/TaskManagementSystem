@@ -55,7 +55,6 @@ class OutboxPage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBarWidget(controller: controller),
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/colors/colors.dart';
 import '../../../constants/strings/strings.dart';
+import 'models/assign_new_model.dart';
 
 
 class AssignTaskStep extends StatelessWidget {
@@ -17,31 +19,23 @@ class AssignTaskStep extends StatelessWidget {
       backgroundColor: appBarColor,
       appBar: AppBar(
         backgroundColor: appBarColor,
-        title: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: screenWidth * 0.01),
-              child: Text(
-                AppStrings.tasks,
-                style: TextStyle(
-                  color: blackColor,
-                  fontSize: screenWidth * 0.06,
-                  fontFamily: 'Rubik',
-                  fontWeight: FontWeight.w700,
-                  height: 0,
-                ),
-              ),
-            ),
-          ],
+        title: Text(
+          AppStrings.tasks,
+          style: TextStyle(
+            color: blackColor,
+            fontSize: screenWidth * 0.06,
+            fontFamily: 'Rubik',
+            fontWeight: FontWeight.w700,
+          ),
         ),
         actions: [
-          const SizedBox(width: 15),
-          IconButton(onPressed: () {}, icon: Icon(Icons.add, color: Colors.white)),
-          const SizedBox(width: 10,),
+          SizedBox(
+            width: screenWidth * 0.02,
+          ),
           Padding(
             padding: EdgeInsets.only(right: screenWidth * 0.04),
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/profilepic.png'),
+              backgroundImage: AssetImage('lib/Assets/profilepic.png'),
               radius: screenWidth * 0.04,
             ),
           ),
@@ -52,32 +46,32 @@ class AssignTaskStep extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(25.0),
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.05),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     AppStrings.title,
                     style: TextStyle(color: backgroundColor, fontSize: 20),
                   ),
-                  SizedBox(height: 13),
+                  SizedBox(height: screenHeight * 0.01),
                   Text(
-                    AppStrings.designChanges,
-                    style: TextStyle(
+                    assignNew[0].title,
+                    style: const TextStyle(
                         color: backgroundColor,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 50),
-                  Text(
+                  SizedBox(height: screenHeight * 0.04),
+                  const Text(
                     AppStrings.assignto,
                     style: TextStyle(color: backgroundColor, fontSize: 20),
                   ),
-                  SizedBox(height: 13),
+                  SizedBox(height: screenHeight * 0.01),
                   Text(
-                    AppStrings.task_name,
-                    style: TextStyle(
+                    assignNew[0].assignTo,
+                    style: const TextStyle(
                         color: backgroundColor,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
@@ -86,7 +80,7 @@ class AssignTaskStep extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(screenWidth * 0.12),
               width: screenWidth,
               decoration: const BoxDecoration(
                 color: backgroundColor,
@@ -102,38 +96,40 @@ class AssignTaskStep extends StatelessWidget {
                     AppStrings.description,
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: screenHeight * 0.01),
                   Container(
                     width: screenWidth * 0.8,
                     child: Text(
-                      AppStrings.description_detail,
-                      style: TextStyle(color: Colors.black, fontSize: 18),
+                      assignNew[0].description,
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  SizedBox(height: screenHeight * 0.02),
+                  const Text(
                     AppStrings.duedate,
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
-                  SizedBox(height: 15),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 0.01 * screenWidth),
-                    child: TextField(
-                      controller: datePickerController,
-                      readOnly: true,
-                      decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.calendar_month),
-                          border: UnderlineInputBorder()),
-                      onTap: () => onTapFunction(context: context),
+                  SizedBox(height: screenHeight * 0.01),
+                  InkWell(
+                    onTap: () => onTapFunction(context: context),
+                    child: AbsorbPointer(
+                      child: TextFormField(
+                        controller: datePickerController,
+                        readOnly: true,
+                        decoration: const InputDecoration(
+                          suffixIcon: Icon(Icons.calendar_today),
+                          border: UnderlineInputBorder(),
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  SizedBox(height: screenHeight * 0.02),
+                  const Text(
                     AppStrings.priority,
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
                   DropdownButtonFormField(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(screenWidth * 0.02),
                     decoration: InputDecoration(
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -144,48 +140,47 @@ class AssignTaskStep extends StatelessWidget {
                     value: _value.value,
                     items: const [
                       DropdownMenuItem(
+                        value: "-1",
                         child: Text(
-                          "",
+                          "--",
                           style: TextStyle(color: Colors.grey),
                         ),
-                        value: "-1",
                       ),
                       DropdownMenuItem(
-                        child: Text("High"),
                         value: "1",
+                        child: Text("High"),
                       ),
                       DropdownMenuItem(
-                        child: Text("Medium"),
                         value: "2",
+                        child: Text("Medium"),
                       ),
                       DropdownMenuItem(
-                        child: Text("Low"),
                         value: "3",
+                        child: Text("Low"),
                       ),
                     ],
                     onChanged: (v) {
                       _value.value = v.toString();
                     },
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: screenHeight * 0.04),
                   Container(
-                    padding: EdgeInsets.only(left: 20),
                     width: screenWidth * 0.8,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle button press
+
                       },
-                      child: Text(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: appBarColor,
+                        elevation: 5,
+                      ),
+                      child: const Text(
                         AppStrings.submit,
                         style: TextStyle(
                           color: backgroundColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: appBarColor,
-                        elevation: 5,
                       ),
                     ),
                   ),
@@ -209,13 +204,5 @@ onTapFunction({required BuildContext context}) async {
     initialDate: DateTime.now(),
   );
   if (pickedDate == null) return;
-
-  // Custom formatting without DateFormat
-  String formattedDate = "${pickedDate.year}-${_addLeadingZero(pickedDate.month)}-${_addLeadingZero(pickedDate.day)}";
-
-  datePickerController.text = formattedDate;
-}
-
-String _addLeadingZero(int value) {
-  return value < 10 ? '0$value' : '$value';
+  datePickerController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
 }

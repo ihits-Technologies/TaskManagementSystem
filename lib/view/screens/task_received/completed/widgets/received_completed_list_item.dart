@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/view/screens/received_task/received_task.dart';
 
 import '../../../../../constants/colors/colors.dart';
 import '../models/task_receive_complete_model.dart';
@@ -36,7 +37,7 @@ class ReceivedCompleteListItem extends GetView {
           ),
           child: GestureDetector(
             onTap: () async {
-              // Get.to(() => AssignTaskStep());
+              Get.to(ReceivedTaskStep());
             },
             child: Material(
               borderRadius: BorderRadius.circular(10.0),

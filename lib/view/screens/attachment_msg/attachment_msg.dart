@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../constants/app_bar.dart';
 import '../../../constants/colors/colors.dart';
+import '../attachment_page/models/user.dart';
 import 'models/attach_msg_model.dart';
 
 
@@ -19,7 +19,7 @@ class AttachmentMessage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: appBarColor,
-      appBar: CustomAppBar(title: attachimg[0].aUsername,),
+      appBar:  CustomAppBar( title: attachimg[0].aUsername,),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.only(top: 1),
