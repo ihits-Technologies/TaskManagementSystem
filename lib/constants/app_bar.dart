@@ -29,13 +29,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: EdgeInsets.only(left: screenWidth * 0.01),
             child: CircleAvatar(
-              backgroundImage: const AssetImage('Assets/profilepic.png'),
+              backgroundImage: const AssetImage('lib/Assets/Ellipse 186.png'),
               radius: screenWidth * 0.04,
             ),
           ),
           const SizedBox(width: 10),
           Text(
-            AppStrings.anupamaDetails,
+            AppStrings.catherine,
             style: TextStyle(
               color: blackColor,
               fontSize: screenWidth * 0.04,
