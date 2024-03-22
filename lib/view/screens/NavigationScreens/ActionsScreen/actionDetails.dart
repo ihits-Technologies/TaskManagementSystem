@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../../constants/app_colors/app_colors.dart';
 import '../../../../models/Action/ActionItem.dart';
 
@@ -22,7 +24,7 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
         backgroundColor: AppColors.AppBarColor,
         title: const Text(
           'Actions',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -33,26 +35,31 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.action.title,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      widget.action.date,
-                      style: const TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.action.title,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+
+                        ),
+                      ),
+                      Text(
+                        _formatDate(widget.action.date),
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ),
                 OutlinedButton(
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
-                        side: const BorderSide(color: AppColors.AppBarColor),
+                        side:  const BorderSide(color: AppColors.AppBarColor),
                       ),
                     ),
                   ),
@@ -72,12 +79,24 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
               itemCount: widget.action.actionsTaken.length,
               itemBuilder: (context, index) {
                 final actionTaken = widget.action.actionsTaken[index];
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                final timeAdded = _formatDateTime(DateTime.now().toString()); // Use current time
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(0, 2),
+                      )
+                    ],
+                  ),
                   child: ListTile(
                     title: Text(actionTaken),
-                    subtitle: Text(widget.action.date),
+                    subtitle: Text(timeAdded),
                   ),
                 );
               },
@@ -129,7 +148,7 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Icon(Icons.message, color: AppColors.AppBarColor),
                                 SizedBox(width: 10.0),
@@ -142,13 +161,15 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20.0), // Adjust spacing as needed
+                            const SizedBox(height: 20.0), // Adjust spacing as needed
                             TextField( // Add a textfield for functionalities
                               controller: _actionController,
                               decoration: InputDecoration(
-                                hintText: 'Enter functionality details...',
+
                                 border: OutlineInputBorder(
+
                                   borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: AppColors.pendingColor)
                                 ),
                               ),
                               maxLines: 3, // Allow multiline input
@@ -179,9 +200,9 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       ),
-                      child: const Text('Submit'),
+                      child:  const Text('Submit',style: TextStyle(color: Colors.white),),
                     ),
                   ],
                 ),
@@ -204,6 +225,18 @@ class _ActionDetailScreenState extends State<ActionDetailScreen> {
         );
       },
     );
+  }
+
+  // Format date
+  String _formatDate(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    return DateFormat('dd MMM yyyy').format(parsedDate);
+  }
+
+  // Format date and time
+  String _formatDateTime(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    return DateFormat('dd MMM yyyy hh:mm a').format(parsedDate);
   }
 
 }
