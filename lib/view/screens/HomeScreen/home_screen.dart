@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:tms/view/screens/NavigationScreens/ChatScreen/chat_home.dart';
 
 import '../../../constants/app_colors/app_colors.dart';
 import '../NavigationScreens/ActionsScreen/actions_screen.dart';
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         children:  [
           TaskScreen(),
-          ActionsScreen(),
+          ActionScreen(tasks: dummyTasks),
           ChatScreen(),
           AttachmentScreen(),
         ],
