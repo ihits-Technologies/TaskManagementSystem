@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/view/screens/attachment_msg/attachment_msg.dart';
 
 import '../models/user.dart';
 
@@ -36,7 +37,7 @@ class AttachmentList extends GetView {
           ),
           child: GestureDetector(
             onTap: () async {
-              // Get.to(() => ReceivedTaskStep());
+              Get.to(() => AttachmentMessage(index: index));
             },
             child: Material(
               borderRadius: BorderRadius.circular(10.0),

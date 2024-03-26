@@ -55,7 +55,6 @@ class InboxPage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBarWidget(controller: controller),
       ),
     );
   }

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/view/screens/assign_new_task/assign_new_task.dart';
 import '../../../constants/colors/colors.dart';
 import '../../../constants/strings/strings.dart';
 import 'completed/completed_assigned.dart';
@@ -47,7 +48,9 @@ class _AssignedState extends State<Assigned>
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(AssignTaskStep());
+                },
                 icon: const Icon(
                   Icons.add,
                   color: Colors.white,
@@ -57,7 +60,7 @@ class _AssignedState extends State<Assigned>
               Padding(
                 padding: EdgeInsets.only(right: Get.width * 0.04),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/profilepic.png'),
+                  backgroundImage: AssetImage('lib/Assets/profilepic.png'),
                   radius: Get.width * 0.04,
                 ),
               ),

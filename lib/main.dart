@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms/view/screens/HomeScreen/home_screen.dart';
+import 'package:tms/view/screens/Launching_screens/splash_screen.dart';
 
 import 'controllers/taskBox_controller/taskBoxController.dart';
 
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
     // Initialize TaskBoxController
     Get.put(TaskBoxController());
 
-    return const GetMaterialApp(
+    return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

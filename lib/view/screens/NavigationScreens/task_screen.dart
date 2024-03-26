@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms/view/screens/received_task/received_task.dart';
 import 'package:tms/view/screens/task_assigned/task_assigned.dart';
+import 'package:tms/view/screens/task_received/task_received.dart';
 
 import '../../../constants/text_styles/text_styles.dart';
 import '../HomeScreen/home_screen_components/announcements_box.dart';

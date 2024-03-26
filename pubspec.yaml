@@ -48,6 +48,7 @@ flutter_icons:
     image_path: "Assets/launcher_icon.png"
     get: ^4.6.6
     firebase_core: ^2.27.1
+    intl: ^0.19.0
 
 
 
@@ -75,8 +76,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/Assets/profilepic.png
-  #   - images/a_dot_ham.jpeg
+    - lib/Assets/
+    - lib/Assets/login_screen/
+#     - lib/Assets/login_screen/
+#     - lib/Assets/attach1.png
+#     - lib/Assets/announcement.png
+#     - lib/Assets/attach2.jpeg
+#     - lib/Assets/attach3.jpeg
+#     - lib/Assets/Ellipse 11.png
+#     - lib/Assets/Ellipse 182.png
+#     - lib/Assets/Ellipse 186.png
+#     - lib/Assets/Ellipse 188.png
+#     - lib/Assets/Ellipse 190.png
+#     - lib/Assets/Ellipse 194.png
+#     - lib/Assets/launcher_icon.png
+#     - lib/Assets/profilepic.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -104,6 +118,7 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
