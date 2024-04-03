@@ -18,6 +18,6 @@ class SplashScreenController extends GetxController {
       Duration(milliseconds: 1400),
     );
     Get.to(GetStarted());
-    //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoginScreen()));
+
   }
 }

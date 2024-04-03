@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms/features/authentication/screens/splash_screen/splash_screen.dart';
-import 'package:tms/view/screens/HomeScreen/home_screen.dart';
 
 import 'controllers/taskBox_controller/taskBoxController.dart';
 
@@ -20,6 +19,9 @@ class MyApp extends StatelessWidget {
 
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
       home: SplashScreen(),
     );
   }

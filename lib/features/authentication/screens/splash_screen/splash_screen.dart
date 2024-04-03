@@ -1,5 +1,8 @@
+import 'dart:async'; // Import Timer class
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tms/features/authentication/screens/get_started/get_started.dart';
 
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
@@ -15,18 +18,22 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final scrHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    //final appbarHeight = appbar.preferredsize.height;
     final statusBarHeight = MediaQuery.of(context).padding.top;
-    final screenHeight = (scrHeight - statusBarHeight);
+
     splashController.startAnimate();
+
+    // Add a timer to delay navigation to the next screen
+    Timer(Duration(seconds: 90), () {
+      // Get.off(GetStarted());
+    });
 
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Obx(
-              () => AnimatedPositioned(
-                duration: const Duration(milliseconds: 300),
+                  () => AnimatedPositioned(
+                duration: const Duration(milliseconds: 900),
                 top: 2,
                 bottom: splashController.animate.value ? 20 : -200,
                 left: 20,
@@ -37,43 +44,46 @@ class SplashScreen extends StatelessWidget {
                   child: SizedBox(
                     height: 30,
                     width: 30,
-                    child: Image(
-                      alignment: FractionalOffset.center,
-                      fit: BoxFit.none,
-                      image: AssetImage(tCompanyLogoAnim),
+                    child: Center(
+                      child: Container(
+                        width: screenWidth* 0.3,
+                        height: screenWidth*0.3,
+
+                        child: Image(
+                          alignment: FractionalOffset.center,
+                          fit: BoxFit.fitHeight,
+                          image: AssetImage(tLexPlan),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-      
-            // Positioned(
-            //   top: 20,
-            //   bottom: 50,
-            //   child: Image(
-            //     image: AssetImage(tCompanyLogo),
-            //   ),
-            // ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomLeft,
-                child: Image(
-                  width: screenWidth,
-                  fit: BoxFit.fitWidth,
-                  image: AssetImage(tRectangle1),
-                ),
+
+            // Image at bottom left
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Image(
+                width: screenWidth,
+                fit: BoxFit.fitWidth,
+                image: AssetImage(tRectangle1),
               ),
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomRight,
-                child: Image(
-                  width: screenWidth,
-                  fit: BoxFit.fitWidth,
-                  image: const AssetImage(tRectangle2),
-                ),
+
+            // Image at bottom right
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Image(
+                width: screenWidth,
+                fit: BoxFit.fitWidth,
+                image: const AssetImage(tRectangle2),
               ),
             ),
+
+            // Text at bottom center
             Positioned(
               bottom: 60,
               left: 20,
@@ -84,14 +94,17 @@ class SplashScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Align(
-              alignment: FractionalOffset.bottomCenter,
+
+
+            Positioned(
+              bottom: 3,
+              left: (screenWidth - 100) / 2,
               child: Image(
                 height: 80,
                 width: 100,
                 image: AssetImage(tCompanyLogo),
               ),
-            )
+            ),
           ],
         ),
       ),

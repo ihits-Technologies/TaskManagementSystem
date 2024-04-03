@@ -7,7 +7,6 @@ import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
 import '../login_screen/login_screen.dart';
 
-
 class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
 
@@ -15,7 +14,6 @@ class GetStarted extends StatelessWidget {
   Widget build(BuildContext context) {
     final scrHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    //final appbarHeight = appbar.preferredsize.height;
     final statusBarHeight = MediaQuery.of(context).padding.top;
     final screenHeight = (scrHeight - statusBarHeight);
 
@@ -23,36 +21,52 @@ class GetStarted extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.center,
-                child: Image(
-                  fit: BoxFit.none,
-                  width: screenWidth,
-                  image: const AssetImage(tCompanyLogoAnim),
+
+            Center(
+              child: Container(
+
+                width: screenWidth/5,
+                padding: EdgeInsets.only(bottom: screenWidth * 0.4),
+
+                child: Center(
+                  child: Image(
+                    fit: BoxFit.contain,
+                    image: const AssetImage(tLexPlan),
+                  ),
                 ),
               ),
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomLeft,
-                child: Image(
-                  fit: BoxFit.fitWidth,
-                  width: screenWidth,
-                  image: AssetImage(tRectangle1),
+            // Column for bottom-left rectangle
+            Column(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomLeft,
+                    child: Image(
+                      fit: BoxFit.fitWidth,
+                      width: screenWidth,
+                      image: AssetImage(tRectangle1),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomRight,
-                child: Image(
-                  fit: BoxFit.fitWidth,
-                  width: screenWidth,
-                  image: const AssetImage(tRectangle2),
+            // Column for bottom-right rectangle
+            Column(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomRight,
+                    child: Image(
+                      fit: BoxFit.fitWidth,
+                      width: screenWidth,
+                      image: const AssetImage(tRectangle2),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
+            // Positioned elements for text and button
             Positioned(
               bottom: 110,
               left: 55,
@@ -85,7 +99,7 @@ class GetStarted extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(
                   left: screenWidth * 0.1,
-                 right: screenWidth * 0.1,
+                  right: screenWidth * 0.1,
                 ),
                 child: ElevatedButton(
                   onPressed: () {
@@ -105,6 +119,5 @@ class GetStarted extends StatelessWidget {
         ),
       ),
     );
-    //);
   }
 }
