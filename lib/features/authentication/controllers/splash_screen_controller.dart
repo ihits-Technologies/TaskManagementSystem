@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 
 import '../screens/get_started/get_started.dart';
 
@@ -17,7 +18,7 @@ class SplashScreenController extends GetxController {
     await Future.delayed(
       Duration(milliseconds: 1400),
     );
-    Get.to(GetStarted());
+    Get.offAll(GetStarted());
 
   }
 }

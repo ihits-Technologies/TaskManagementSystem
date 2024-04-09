@@ -4,22 +4,31 @@ import '../../constants/colors.dart';
 
 class Textfield extends StatelessWidget
 {
-
-final String labelText ;
-final String hintText;
+  final TextEditingController controller;
+  final String hintText;
+  final bool obscureText;
+  final FocusNode? focusNode;
 
 Textfield({
-  required this.labelText,
+  super.key,
+  required this.controller,
   required this.hintText,
+  required this.obscureText,
+  this.focusNode
 
 });
+
+
 
 @override
   Widget build(BuildContext context) {
   return
     TextField(
+      controller: controller,
+      focusNode: focusNode,
+      obscureText: obscureText,
       decoration: InputDecoration(
-        labelText: labelText,
+
         labelStyle: TextStyle(
             color: tPrimaryColor
         ),

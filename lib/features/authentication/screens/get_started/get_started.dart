@@ -1,17 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:tms/features/authentication/screens/login_screen/login_screen.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
-import '../login_screen/login_screen.dart';
+import '../../../../view/screens/HomeScreen/home_screen.dart';
+
 
 class GetStarted extends StatelessWidget {
-  const GetStarted({super.key});
+  const GetStarted({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
+
+    // Check if the user is logged in
+    void checkAuthentication() {
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user != null) {
+          // User is signed in, navigate to the HomeScreen
+          Get.off(() => HomeScreen());
+        } else {
+          // User is not signed in, navigate to the LoginScreen
+          Get.off(() => LoginScreen());
+        }
+      });
+    }
+
+    // Call the authentication check method when the widget is built
+    WidgetsBinding.instance!.addPostFrameCallback((_) => checkAuthentication());
+
     final scrHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final statusBarHeight = MediaQuery.of(context).padding.top;

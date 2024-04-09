@@ -1,14 +1,64 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tms/view/screens/HomeScreen/home_screen.dart';
 
+import '../../../../auth/auth_services.dart';
 import '../../../../common_widgets/login_screen/textfield.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  final void Function()? onTap;
+  const LoginScreen({Key? key, this.onTap}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void login(BuildContext context) async {
+    final authService = AuthService();
+
+    try {
+      // Validate email and password inputs
+      if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please enter both email and password.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
+      // Sign in the user with email and password
+      await authService.signInWithEmailPassword(
+        _emailController.text,
+        _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      // Handle FirebaseAuthException
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Authentication Failed'),
+          content: Text(e.message ?? 'An error occurred.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +69,6 @@ class LoginScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Dismiss the keyboard when tapped outside of the text field
         FocusScope.of(context).unfocus();
       },
       child: SafeArea(
@@ -62,8 +111,10 @@ class LoginScreen extends StatelessWidget {
                   height: 60,
                   width: 320,
                   child: Textfield(
-                    labelText: "Company ID",
-                    hintText: "Enter your Company ID",
+                    controller: _emailController,
+                      hintText: "Email",
+                      obscureText: false
+
                   ),
                 ),
                 SizedBox(height: 5),
@@ -71,26 +122,17 @@ class LoginScreen extends StatelessWidget {
                   height: 60,
                   width: 320,
                   child: Textfield(
-                    labelText: "User ID",
-                    hintText: "Enter your User ID",
-                  ),
-                ),
-                SizedBox(height: 5),
-                SizedBox(
-                  height: 60,
-                  width: 320,
-                  child: Textfield(
-                    labelText: "Password",
-                    hintText: "Enter your Password",
+                    controller: _passwordController,
+                      hintText: "Password",
+                      obscureText: true
+
+
                   ),
                 ),
                 SizedBox(height: 8),
                 Builder(
                   builder: (context) => ElevatedButton(
-                    onPressed: () {
-                      // Navigate to HomeScreen here
-                      Get.to(() => HomeScreen());
-                    },
+                    onPressed: () => login(context),
                     style: ElevatedButton.styleFrom(
                       elevation: 3,
                       backgroundColor: tPrimaryColor,
@@ -101,8 +143,8 @@ class LoginScreen extends StatelessWidget {
                     child: const Text(tLogin),
                   ),
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   tPowered,
                   style: TextStyle(
                     fontSize: 12,
