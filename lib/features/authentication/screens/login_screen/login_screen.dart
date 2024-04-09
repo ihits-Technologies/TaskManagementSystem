@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../auth/auth_services.dart';
+
 import '../../../../common_widgets/login_screen/textfield.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
+import '../../../../services/auth/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   final void Function()? onTap;

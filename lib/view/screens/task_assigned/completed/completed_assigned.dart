@@ -12,7 +12,7 @@ class CompletedAssigned extends StatelessWidget {
     return SafeArea(
           child: Container(
             decoration: const BoxDecoration(
-              color: backgroundColor,
+              color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(28),
                 topRight: Radius.circular(28),

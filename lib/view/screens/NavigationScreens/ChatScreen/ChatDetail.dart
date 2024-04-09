@@ -1,7 +1,9 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
-// import 'package:tms/services/firebase/firebase_service.dart';
 //
-// import '../../../../app_colors/app_colors.dart';
+// import '../../../../constants/app_colors/app_colors.dart';
+// import '../../../../services/chat/chat_services.dart';
+//
 //
 // class ChatDetail extends StatefulWidget {
 //   final String chatId;

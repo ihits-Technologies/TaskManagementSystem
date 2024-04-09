@@ -1,9 +1,10 @@
 // import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
 // import 'package:tms/view/screens/NavigationScreens/ChatScreen/ChatDetail.dart';
 // import 'dart:io';
 //
-// import '../../../../app_colors/app_colors.dart';
-// import '../../../../model/chat/chat_model.dart';
+// import '../../../../constants/app_colors/app_colors.dart';
+// import '../../../../models/chat/chat_model.dart';
 // import 'contacts_screen.dart';
 //
 // class ChatScreen extends StatefulWidget {
@@ -185,7 +186,7 @@
 //                               chatImageUrl: chat.imageUrl,
 //                             ),
 //                           ));
-//                       // Add onTap functionality here
+                      // Add onTap functionality here
 //                     },
 //                   ),
 //                 );
