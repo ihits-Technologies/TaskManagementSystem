@@ -87,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
           _selectedIndex.value = index;
         },
         children: [
-          TaskScreen(), // No app bar
-          ActionsScreen(),
+          TaskScreen(),
+          ActionScreen(tasks: dummyTasks),
           ChatScreen(),
           AttachPage(),
         ],

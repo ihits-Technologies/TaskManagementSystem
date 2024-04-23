@@ -58,8 +58,10 @@ class ChatScreen extends StatelessWidget {
         } else {
           final lastMessageTime = snapshot.data ?? DateTime.now();
           final userName = userData["uname"] ?? "Unknown";
+          final imageUrl = userData["imageUrl"] ?? "";
           return UserTile(
             text: userName,
+            imageUrl: imageUrl,
             onTap: () {
               Navigator.push(
                 context,
@@ -67,6 +69,8 @@ class ChatScreen extends StatelessWidget {
                   builder: (context) => ChatPage(
                     receiverEmail: userData["email"],
                     receiverID: userData["uid"],
+                    imageUrl: imageUrl,
+
                   ),
                 ),
               );
