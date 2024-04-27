@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/image_strings.dart';
 import '../../../constants/text_strings.dart';
 import 'login_screen.dart';
-
-
 
 class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
@@ -91,11 +88,13 @@ class GetStarted extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     debugPrint('ElevatedButton Clicked');
-                    Get.to(LoginScreen());
+                    Get.to( LoginScreen());
                   },
                   style: ElevatedButton.styleFrom(
+                    // Set the desired background color here
+                      backgroundColor: tSecondaryColor, // Assuming tSecondaryColor is defined in your constants
                       elevation: 3,
-                      foregroundColor: tPrimaryColor,
+                      foregroundColor: Colors.white, // Adjust foreground color (text) if needed
                       fixedSize: const Size(320, 30),
                       shape: const StadiumBorder()),
                   child: const Text(tBtnGetStart),
@@ -106,6 +105,5 @@ class GetStarted extends StatelessWidget {
         ),
       ),
     );
-    //);
   }
 }
