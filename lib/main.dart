@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tms/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:tms/firebase_options.dart';
+import 'package:tms/view/screens/HomeScreen/home_screen.dart';
 import 'Themes/themes_provider.dart';
 import 'controllers/taskBox_controller/taskBoxController.dart';
 
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
     Get.put(TaskBoxController());
 
     return  GetMaterialApp(
+      routes: {
+        '/home': (context) => HomeScreen()
+      },
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       theme: Provider.of<ThemeProvider>(context).themeData,

@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:tms/services/api_authentication/auth_api_services.dart'; // Ensure this import is correct
 import '../../../../common_widgets/login_screen/textfield.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/text_strings.dart';
-import '../../../../services/auth/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   final void Function()? onTap;
@@ -19,43 +16,41 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
 
   void login(BuildContext context) async {
-    final authService = AuthService();
-
     try {
-      // Validate email and password inputs
       if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Please enter both email and password.'),
+            content: Text('Please enter both username and password.'),
             backgroundColor: Colors.red,
           ),
         );
         return;
       }
 
-      // Sign in the user with email and password
-      await authService.signInWithEmailPassword(
+      final response = await _authService.loginUser(
         _emailController.text,
         _passwordController.text,
       );
-    } on FirebaseAuthException catch (e) {
-      // Handle FirebaseAuthException
-      print('Failed with error code: ${e.code}');
-      print(e.message);
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Authentication Failed'),
-          content: Text(e.message ?? 'An error occurred.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
-            ),
-          ],
+
+      if (response['Code'] == 1) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('User verification failed: ${response['Message']}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred: $e'),
+          backgroundColor: Colors.red,
         ),
       );
     }
@@ -63,10 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final scrHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    final statusBarHeight = MediaQuery.of(context).padding.top;
-    final screenHeight = (scrHeight - statusBarHeight);
 
     return GestureDetector(
       onTap: () {
@@ -113,9 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 320,
                   child: Textfield(
                     controller: _emailController,
-                      hintText: "Email",
-                      obscureText: false
-
+                    hintText: "Email",
+                    obscureText: false,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -124,10 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 320,
                   child: Textfield(
                     controller: _passwordController,
-                      hintText: "Password",
-                      obscureText: true
-
-
+                    hintText: "Password",
+                    obscureText: true,
                   ),
                 ),
                 SizedBox(height: 8),
